@@ -1,11 +1,31 @@
 # Generative Doc Search
 
-This is a generative search system capable of effectively and accurately answering questions from a Group Member Life Insurance Policy document.
+This is a generative search system capable of effectively and accurately answering questions from a Group Member Life Insurance Policy document using LlamaIndex.
 
-The project comprises of following three layers in order to build an effective search system:
+## 1. Requirements
+The system relies on several core Python libraries for document processing, vector storage, and language model interaction:
+- `llama-index` (RAG Framework)
+- `chromadb` (Vector Database)
+- `openai` (LLM Provider)
+- `sentence-transformers` (Reranking Model)
 
-**The Embedding Layer:** The insurance document needs to be effectively processed, cleaned, and chunked for the embeddings.
+## 2. Environment Setup
+Install the necessary dependencies using the following command:
+```bash
+pip install llama-index chromadb openai sentence-transformers
+```
 
-**The Search Layer:** Here, you first need to design at least 3 queries against which you will test your system. You need to understand and skim through the document, and accordingly come up with some queries, the answers to which can be found in the policy document. Here we embed the search queries and search ChromaDB vector database against each of these queries. A cache mechanism is also implemented to handle the load. Finally, there is a re-ranking block implemented using cross-encoding model.
+## 3. File System & Configuration
+Ensure your project root is structured as follows for the ingestion pipeline to function correctly:
 
-**The Generation Layer:** In the generation layer, the final prompt design is the major component. Here we make sure that the prompt is exhaustive in its instructions, and the relevant information is correctly passed to the prompt.
+- **'data/' Directory:** Create a folder named `data` in the root directory and place all insurance PDF documents (e.g., policy handbooks, claim forms) inside it.
+- **'storage/' Directory:** Create a folder named `storage` in the root directory for ChromaDB database.
+- **'openai_api_key.json':** Create a JSON file in the root directory to store your API credentials. The file must follow this exact format:
+  ```json
+  {
+    "api_key": "YOUR_KEY_HERE"
+  }
+  ```
+
+## 4. Running the System
+Once the libraries are installed and the files are in place, you can execute the notebook cells sequentially to initialize the database, build the index, and begin querying the insurance documents.
